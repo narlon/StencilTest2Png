@@ -20,17 +20,26 @@ namespace StencilTest2Png
             tempHeight = tempImg.Height;
             CheckTemp(tempImg);
 
-            var inputFolder = @"E:\doc\minister\数据表\ResH5\peopleskill";
-            var outFolder = @"E:\doc\minister\数据表\ResH5\peopleskill1\";
+            var inputFolder = @".\a";
+            var outFolder = @".\b\";
             foreach (var fileName in Directory.GetFiles(inputFolder))
             {
                 var fileInfo = new FileInfo(fileName);
                 if (fileInfo.Extension != ".png")
                     continue;
 
+                Console.WriteLine(fileName + " begin! ");
                 var testImage = Image.FromFile(fileName);
-                Effect((Bitmap)testImage);
-                testImage.Save(outFolder + fileInfo.Name);
+                try
+                {
+                    Effect((Bitmap)testImage);
+                    testImage.Save(outFolder + fileInfo.Name);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine(fileName + " broken! ");
+                }
+                
                 testImage = null;
             }
         }
