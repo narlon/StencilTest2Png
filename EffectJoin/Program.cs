@@ -49,7 +49,7 @@ namespace EffectJoin
         {
             for (int i = 16; i <= 1024; i*=2)
             {
-                if (val < i)
+                if (val <= i)
                     return i;
             }
             return 2048;
